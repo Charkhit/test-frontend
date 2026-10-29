@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--page-background);
+}
+
+.topbar {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding-inline: max(1.25rem, calc((100vw - 1200px) / 2));
+  color: #f4fff8;
+  background: var(--green-800);
+}
+
+.screen-id {
+  grid-column: 2;
+  justify-self: center;
+  padding: 0.35rem 0.6rem;
+}
+
+.page-content {
+  width: min(100% - 3rem, 1200px);
+  margin-inline: auto;
+  padding-block: clamp(2.25rem, 5vw, 4rem) 4rem;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.add-button {
+  min-height: 44px;
+  padding-inline: 1rem 1.5rem;
+}
+
+.add-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.8;
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    min-height: 54px;
+  }
+
+  .page-content {
+    width: min(100% - 2rem, 1200px);
+    padding-block: 2rem 3rem;
+  }
+}

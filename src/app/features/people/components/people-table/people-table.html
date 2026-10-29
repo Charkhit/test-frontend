@@ -1,0 +1,59 @@
+<section class="list-surface" aria-label="รายการข้อมูลบุคคล">
+  @if (loading()) {
+    <div class="status-state" role="status" aria-live="polite">
+      <span class="status-indicator" aria-hidden="true"></span>
+      <p>กำลังโหลดข้อมูลบุคคล…</p>
+    </div>
+  } @else if (loadError(); as error) {
+    <div class="status-state error-state">
+      <p role="alert">{{ error }}</p>
+      <button class="button button-secondary" type="button" (click)="retryRequested.emit()">
+        ลองอีกครั้ง
+      </button>
+    </div>
+  } @else if (records().length > 0) {
+    <div
+      class="table-scroll"
+      tabindex="0"
+      role="region"
+      aria-label="ตารางข้อมูลบุคคล"
+      aria-describedby="table-scroll-hint"
+    >
+      <table>
+        <caption class="visually-hidden">รายการข้อมูลบุคคล เรียงตามวันเวลาที่สร้าง</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">ชื่อ-สกุล</th>
+            <th scope="col">ที่อยู่</th>
+            <th scope="col">วันเกิด</th>
+            <th scope="col">อายุ</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (record of records(); track record.id; let index = $index) {
+            <tr>
+              <td class="id-cell" data-label="Id">{{ index + 1 }}</td>
+              <td class="name-cell" data-label="ชื่อ-สกุล">{{ record.firstName }} {{ record.lastName }}</td>
+              <td class="number-cell address-cell" data-label="ที่อยู่">{{ record.address }}</td>
+              <td class="date-cell" data-label="วันเกิด">{{ formatDate(record.birthDate) }}</td>
+              <td class="number-cell" data-label="อายุ">{{ ageNonLabel(record.birthDate) }}</td>
+              <td class="action-cell" data-label="Action">
+                <button class="button button-view" type="button" (click)="view(record)">
+                  View
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h3>ยังไม่มีข้อมูลบุคคล</h3>
+      <p>เลือก ADD เพื่อเริ่มเพิ่มรายการแรก</p>
+      <button class="button button-secondary" type="button" (click)="addRequested.emit()">เพิ่มข้อมูล</button>
+    </div>
+  }
+</section>

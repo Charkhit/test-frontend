@@ -1,0 +1,166 @@
+:host {
+  display: block;
+}
+
+.list-surface {
+  overflow: hidden;
+  border: 1px solid var(--line-300);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.table-scroll {
+  max-width: 100%;
+  max-height: min(68vh, 640px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 0.82rem 1rem;
+  border-bottom: 1px solid var(--line-300);
+  vertical-align: middle;
+}
+
+thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--aqua-100);
+  color: #153a36;
+  font-size: 0.82rem;
+  font-weight: 720;
+  white-space: nowrap;
+}
+
+tbody td {
+  color: var(--ink-750);
+  font-size: 0.92rem;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover {
+  background: #f7faf8;
+}
+
+.number-cell {
+  width: 86px;
+  color: var(--ink-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.id-cell {
+  width: 180px;
+  max-width: 180px;
+  color: var(--ink-600);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.name-cell {
+  min-width: 180px;
+  color: var(--ink-950);
+  font-weight: 620;
+}
+
+.address-cell {
+  min-width: 260px;
+  width: auto;
+  font-variant-numeric: normal;
+}
+
+.date-cell {
+  width: 150px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.action-cell {
+  width: 105px;
+  text-align: center;
+}
+
+.scroll-hint {
+  margin: 0;
+  padding: 0.65rem 1rem 0.8rem;
+  border-top: 1px solid var(--line-300);
+  color: var(--ink-600);
+  font-size: 0.78rem;
+}
+
+.empty-state {
+  display: grid;
+  justify-items: start;
+  gap: 0.4rem;
+  padding: 2.75rem 1.5rem;
+}
+
+.empty-state h3 {
+  margin: 0;
+  color: var(--ink-950);
+  font-size: 1.15rem;
+  font-weight: 720;
+}
+
+.empty-state p {
+  margin: 0.45rem 0 0;
+  color: var(--ink-600);
+  font-size: 0.96rem;
+}
+
+.empty-state .button {
+  margin-top: 0.9rem;
+}
+
+.status-state {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 2rem 1.5rem;
+  color: var(--ink-600);
+  text-align: center;
+}
+
+.status-state p {
+  margin: 0;
+}
+
+.status-indicator {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  border: 3px solid var(--line-300);
+  border-top-color: var(--green-800);
+  border-radius: 50%;
+  animation: status-spin 0.8s linear infinite;
+}
+
+.error-state p {
+  color: #9b2525;
+}
+
+@keyframes status-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-indicator {
+    animation: none;
+  }
+}

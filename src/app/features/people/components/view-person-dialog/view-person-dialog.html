@@ -1,0 +1,36 @@
+<dialog
+  #personDialog
+  class="person-dialog"
+  aria-label="รายละเอียดบุคคล"
+  (close)="onDialogClosed()"
+>
+  @if (record(); as person) {
+    <section class="dialog-view">     
+      <dl class="detail-list">
+        <div class="detail-row name-row">
+          <dt>ชื่อ - สกุล</dt>
+          <dd class="name-values">
+            <span class="read-only-field">{{ person.firstName }}</span>
+            <span class="read-only-field">{{ person.lastName }}</span>
+          </dd>
+        </div>
+        <div class="detail-row">
+          <dt>วันเกิด</dt>
+          <dd><span class="read-only-field birth-date-value">{{ formatDate(person.birthDate) }}</span></dd>
+        </div>
+        <div class="detail-row age-row">
+          <dt>อายุ</dt>
+          <dd class="age-value">{{ ageLabel(person.birthDate) }}</dd>
+        </div>
+        <div class="detail-row detail-address">
+          <dt>ที่อยู่</dt>
+          <dd><div class="read-only-address">{{ person.address }}</div></dd>
+        </div>
+      </dl>
+
+      <footer class="dialog-actions">
+        <button class="button button-primary" type="button" (click)="close()">ปิด</button>
+      </footer>
+    </section>
+  }
+</dialog>

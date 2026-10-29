@@ -1,0 +1,113 @@
+<dialog
+  #personDialog
+  class="person-dialog"
+  aria-label="ฟอร์มเพิ่มข้อมูลบุคคล"
+  (cancel)="onDialogCancel($event)"
+  (close)="onDialogClosed()"
+>
+  <form class="dialog-form" [formGroup]="personForm" (ngSubmit)="submit()" [attr.aria-busy]="saving()" novalidate>
+    
+
+    <div class="form-content">
+      @if (validationError() || saveError()) {
+        <p class="form-error form-error-summary" role="alert">
+          {{ validationError() || saveError() }}
+        </p>
+      }
+
+      <fieldset class="form-row name-row">
+        <label>ชื่อ - สกุล</label>
+        <div class="name-inputs">
+          <div class="field-control">
+            <label class="visually-hidden" for="first-name">ชื่อ</label>
+            <input
+              id="first-name"
+              type="text"
+              autocomplete="given-name"
+              formControlName="firstName"
+              required
+              autofocus
+              [attr.aria-invalid]="personForm.controls.firstName.touched && personForm.controls.firstName.invalid"
+              [attr.aria-describedby]="personForm.controls.firstName.touched && personForm.controls.firstName.invalid ? 'first-name-error' : null"
+            />
+            @if (personForm.controls.firstName.touched && personForm.controls.firstName.invalid) {
+              <span id="first-name-error" class="form-error">กรุณากรอกชื่อ</span>
+            }
+          </div>
+          <div class="field-control">
+            <label class="visually-hidden" for="last-name">นามสกุล</label>
+            <input
+              id="last-name"
+              type="text"
+              autocomplete="family-name"
+              formControlName="lastName"
+              required
+              [attr.aria-invalid]="personForm.controls.lastName.touched && personForm.controls.lastName.invalid"
+              [attr.aria-describedby]="personForm.controls.lastName.touched && personForm.controls.lastName.invalid ? 'last-name-error' : null"
+            />
+            @if (personForm.controls.lastName.touched && personForm.controls.lastName.invalid) {
+              <span id="last-name-error" class="form-error">กรุณากรอกนามสกุล</span>
+            }
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-row">
+        <label class="row-label" for="birth-date">วันเกิด</label>
+        <div class="field-control birth-date-control">
+          <input
+            id="birth-date"
+            type="date"
+            [max]="today"
+            formControlName="birthDate"
+            required
+            (input)="onBirthDateInput($event)"
+            [attr.aria-invalid]="personForm.controls.birthDate.touched && personForm.controls.birthDate.invalid"
+            [attr.aria-describedby]="personForm.controls.birthDate.touched && personForm.controls.birthDate.invalid ? 'birth-date-error' : null"
+          />
+          @if (personForm.controls.birthDate.touched && personForm.controls.birthDate.invalid) {
+            <span id="birth-date-error" class="form-error">กรุณาเลือกวันเกิด</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-row">
+        <span class="field-label">อายุ</span>
+        <div class="field-control age-field">
+          <output class="age-output" aria-live="polite">
+            @if (selectedBirthDate()) {
+              {{ ageForBirthDate(selectedBirthDate()) ?? '—' }} ปี
+            } @else {
+              <span class="muted-value">—</span>
+            }
+          </output>
+        </div>
+      </div>
+
+      <div class="form-row address-row">
+        <label class="row-label" for="address">ที่อยู่</label>
+        <div class="field-control">
+          <textarea
+            id="address"
+            rows="4"
+            autocomplete="street-address"
+            formControlName="address"
+            required
+            [attr.aria-invalid]="personForm.controls.address.touched && personForm.controls.address.invalid"
+            [attr.aria-describedby]="personForm.controls.address.touched && personForm.controls.address.invalid ? 'address-error' : null"
+          ></textarea>
+          @if (personForm.controls.address.touched && personForm.controls.address.invalid) {
+            <span id="address-error" class="form-error">กรุณากรอกที่อยู่</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <footer class="dialog-actions">
+      <button class="button button-secondary" type="button" [disabled]="saving()" (click)="cancel()">ยกเลิก</button>
+      <button class="button button-primary" type="submit" [disabled]="saving()">
+        {{ saving() ? 'กำลังบันทึก…' : 'บันทึก' }}
+      </button>
+    </footer>
+  </form>
+</dialog>

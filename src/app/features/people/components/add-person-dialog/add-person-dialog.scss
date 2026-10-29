@@ -1,0 +1,130 @@
+.form-content {
+  display: grid;
+  gap: 0.95rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+}
+
+.form-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(90px, 0.32fr) minmax(0, 1fr);
+  align-items: start;
+  column-gap: 1rem;
+  margin: 0;
+}
+
+.name-row {
+  padding: 0;
+  border: 0;
+}
+
+.row-label,
+.field-label {
+  display: block;
+  margin: 0;
+  padding: 0.62rem 0 0;
+  color: var(--ink-800);
+  font-size: 0.89rem;
+  font-weight: 650;
+}
+
+.name-inputs {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field-control {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+}
+
+.field-control input,
+.field-control textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #aebbb4;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink-950);
+  font: inherit;
+  font-size: 0.94rem;
+}
+
+.field-control textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.field-control input:hover,
+.field-control textarea:hover {
+  border-color: var(--ink-600);
+}
+
+.field-control input[aria-invalid='true'],
+.field-control textarea[aria-invalid='true'] {
+  border-color: #b42318;
+}
+
+.birth-date-control {
+  max-width: 240px;
+}
+
+.age-output {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0;
+  color: var(--ink-800);
+  font-size: 0.94rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.muted-value {
+  color: var(--ink-500);
+}
+
+.form-error {
+  color: #9a211a;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.form-error-summary {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #e7b3ad;
+  border-radius: 6px;
+  background: #fff5f3;
+}
+
+@media (max-width: 680px) {
+  .form-content {
+    padding: 1.1rem 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.4rem;
+  }
+
+  .name-inputs {
+    gap: 0.65rem;
+  }
+
+  .row-label,
+  .field-label {
+    padding-top: 0;
+  }
+
+  .age-output {
+    min-height: 30px;
+    padding-block: 0;
+  }
+}
